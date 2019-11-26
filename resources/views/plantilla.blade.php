@@ -6,19 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/freelancer.css">
-  <script src="{{asset('/js/app.js')}}" type="text/javascript"></script>
   <title>Mamas luchonas</title>
 </head>
 
 <body id="page-top">
-
-    @include('Partials/barraDeNavegacion')
-
+   <div id="app">
+     <nav-bar />
+   </div>
     @yield('Contenido')
     
     @include('Partials/Footer')
 
-
-  
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 </body> 
 </html>

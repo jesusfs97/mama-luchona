@@ -1,8 +1,9 @@
- @extends('plantilla')
+@extends('plantilla')
 
 @section('Contenido')
 
 @if( $CDF[3]['colorDeFondo'] === "null")
+
 
 <header class="masthead text-white text-center" style="background-image:url({{Storage::url($CDF[3]['imagenDeFondo'])}});">
 @else

@@ -1,8 +1,12 @@
-<nav class="navbar navbar-expand-lg text-uppercase fixed-top navbar-dark" style="background-color:{{$CDF[0]['colorDeFondo']}}">
+<template>
+    <div>
+
+        <nav class="navbar navbar-expand-lg text-uppercase fixed-top navbar-dark">
     <div class="container">
 
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Mamás Luchonas</a>
-        <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+            data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
@@ -10,17 +14,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto ">
 
+                <li class="nav-item mx-2" v-for="(m, index) in menus" :key="index">
+                    <a class="nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold" v-bind:href="m.href" >{{ m.Titulo}} </a>
+                </li>
 
-                @forelse($menus as $m)
-                <li class="nav-item mx-2">
-                    <a class="nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold" style="background-color:{{$m->colorFondo}}; color:{{$m->colorTexto}}" href="{{$m->href}}">{{ $m->Titulo}}</a>
-                </li>
-                @empty
                 <li class="nav-item mx-2">
                     
                 </li>
                     
-                @endforelse
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Despegable</a>
                     <div class="dropdown-menu">
@@ -35,3 +36,26 @@
         </div>
     </div>
 </nav>
+    </div>
+
+</template>
+
+<script>
+export default {
+    name: 'barra',
+    data(){
+        return{
+            menus:[],
+
+        }
+
+    },
+    mounted(){
+        axios.get('/Administrar').then(res =>{
+            this.menus = res.data;
+        })
+    },
+
+    
+}
+</script>

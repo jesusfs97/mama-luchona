@@ -2,34 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Navbar;
 use Illuminate\Http\Request;
-use App;
 
-class AdminController extends Controller
+class NavbarController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-        if($request->ajax())
-        $menus = App\Menu::all();
-        return $menus;
-
+    public function index()
+    {
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        //
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -44,54 +41,44 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Navbar  $navbar
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Navbar $navbar)
     {
-
+        //
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Navbar  $navbar
      * @return \Illuminate\Http\Response
      */
-    public function editar($id)
-    {   $Titulo = App\Menu::findOrFail($id);
-        return view('editarMenu', compact('Titulo'));
+    public function edit(Navbar $navbar)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Navbar  $navbar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Navbar $navbar)
     {
-        $menuAcualizado = App\Menu::findOrFail($id);
-        $menuAcualizado->Titulo = $request->nombre;
-        $menuAcualizado->colorFondo = $request->colorFondo;
-        $menuAcualizado->colorTexto = $request->colorTexto;
-
-        $menuAcualizado->save();
-
-        return redirect()->route('Administrar');
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Navbar  $navbar
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Navbar $navbar)
     {
         //
     }
