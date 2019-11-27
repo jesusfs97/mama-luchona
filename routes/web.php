@@ -17,6 +17,7 @@ Route::view('/', 'home')->name('inicio');
 
 Route::view('/Contacto', 'contacto')->name('Contacto');
 
+Route::get('/Barra', 'NavbarController@index')->name('Administrar');
 Route::get('/Administrar', 'AdminController@index')->name('Administrar');
 Route::get('/Administrar/EditarColor{id}','ColorController@editar')->name('Colores.Editar');
 Route::Put('/Administrar/EditarColor{id}','ColorController@update')->name('actualizarColor');

@@ -12,11 +12,13 @@
 <body id="page-top">
    <div id="app">
      <nav-bar />
-   </div>
-    @yield('Contenido')
-    
-    @include('Partials/Footer')
+    </div>
 
+     @yield('Contenido')
+     
+     @include('Partials/Footer')
+     
+    
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 </body> 
 </html>

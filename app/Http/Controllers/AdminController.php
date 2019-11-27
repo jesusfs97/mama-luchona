@@ -18,9 +18,11 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {   
-        if($request->ajax())
+
         $menus = App\Menu::all();
-        return $menus;
+        $fondo = App\Color::all();
+        return view('Administrar', compact('menus', 'fondo'));
+
 
     }
 

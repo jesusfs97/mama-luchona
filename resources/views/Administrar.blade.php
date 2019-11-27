@@ -1,6 +1,8 @@
 @extends('plantilla')
 
+
 @section('Contenido')
+
 <div class=" container">
     <div class="row masthead text-center">
         <h1 class="display-4">Menus</h1>

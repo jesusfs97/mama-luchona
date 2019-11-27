@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $valor = App\Menu::all();
         view()->share('menus', $valor);
 
-        $fondo = App\color::all();
+        $fondo = App\Color::all();
         view()->share('CDF', $fondo); # CDF (Color De Fondo)
     }
 }

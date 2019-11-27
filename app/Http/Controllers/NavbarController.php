@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Navbar;
 use Illuminate\Http\Request;
+use App;
 
 class NavbarController extends Controller
 {
@@ -12,9 +12,11 @@ class NavbarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax())
+        $menus = App\Menu::all();
+        return $menus;
     }
 
     /**

@@ -15,10 +15,13 @@
             <ul class="navbar-nav ml-auto ">
 
                 <li class="nav-item mx-2" v-for="(m, index) in menus" :key="index">
-                    <a class="nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold" v-bind:href="m.href" >{{ m.Titulo}} </a>
+                    <a class="nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold"
+                    v-bind:style="{ backgroundColor: m.colorFondo, color:m.colorTexto}"
+                    v-bind:href="m.href" >{{ m.Titulo}} </a>
                 </li>
 
                 <li class="nav-item mx-2">
+                    {{m}}
                     
                 </li>
                     
@@ -51,7 +54,7 @@ export default {
 
     },
     mounted(){
-        axios.get('/Administrar').then(res =>{
+        axios.get('/Barra').then(res =>{
             this.menus = res.data;
         })
     },

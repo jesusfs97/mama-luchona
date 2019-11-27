@@ -1880,6 +1880,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'barra',
   data: function data() {
@@ -1890,7 +1893,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/Administrar').then(function (res) {
+    axios.get('/Barra').then(function (res) {
       _this.menus = res.data;
     });
   }
@@ -37245,6 +37248,10 @@ var render = function() {
                           {
                             staticClass:
                               "nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold",
+                            style: {
+                              backgroundColor: m.colorFondo,
+                              color: m.colorTexto
+                            },
                             attrs: { href: m.href }
                           },
                           [_vm._v(_vm._s(m.Titulo) + " ")]
@@ -37253,7 +37260,13 @@ var render = function() {
                     )
                   }),
                   _vm._v(" "),
-                  _c("li", { staticClass: "nav-item mx-2" }),
+                  _c("li", { staticClass: "nav-item mx-2" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.m) +
+                        "\n                    \n                "
+                    )
+                  ]),
                   _vm._v(" "),
                   _vm._m(1)
                 ],
