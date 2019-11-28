@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <nav class="navbar navbar-expand-lg text-uppercase fixed-top navbar-dark">
+        <nav class="navbar navbar-expand-lg text-uppercase fixed-top barra-transparente">
     <div class="container">
 
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Mamás Luchonas</a>

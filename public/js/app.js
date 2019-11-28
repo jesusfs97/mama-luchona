@@ -37212,7 +37212,7 @@ var render = function() {
       "nav",
       {
         staticClass:
-          "navbar navbar-expand-lg text-uppercase fixed-top navbar-dark"
+          "navbar navbar-expand-lg text-uppercase fixed-top barra-transparente"
       },
       [
         _c("div", { staticClass: "container" }, [

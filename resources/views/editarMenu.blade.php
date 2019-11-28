@@ -9,15 +9,29 @@
                 <div class="form-row  ">   
                         <div class="col-sm-3">
                                 <label for="nombre">Renombrar titulo:</label>
-                                <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Renombrar titulo" class="form-control mb-2" value="{{ $Titulo->Titulo }}">
+                                <input class="form-control"type="text"
+                                        id="nombre"
+                                        name="nombre"
+                                        placeholder="Renombrar titulo"
+                                        class="form-control mb-2"
+                                        required
+                                        value="{{ $Titulo->Titulo }}">
                         </div>
+
+
                         <div class="col-sm-3">
                                 <label for="color">Cambiar color de fondo</label>
-                                <input class="form-control" type="color" value="{{ $Titulo->colorFondo}}" name="colorFondo" id="color">
+                                <input class="form-control" type="text"
+                                        id="color"
+                                        name="colorFondo"
+                                        minlength="7" 
+                                        maxlength="9"
+                                        value="{{ $Titulo->colorFondo}}"
+                                        >
                         </div>
                         <div class="col-sm-3">
                                 <label for="color1">Cambiar color de texto</label>
-                                <input class="form-control" type="color" value="{{ $Titulo->colorTexto}}" name="colorTexto" id="color1">
+                                <input class="form-control" type="text" minlength="7" maxlength="9" value="{{ $Titulo->colorTexto}}" name="colorTexto" id="color1">
                         </div>
                         {{-- <div class="col-sm-3">
                                 <label for="Tipografia">Cambiar ancho del texto</label>

@@ -14,6 +14,7 @@
 //con el metodo view estamos diciendo que cunado valla a la url nose devuelva tal vista
 
 Route::view('/', 'home')->name('inicio');
+route::view('/#Tienda', 'home')->name('tienda');
 
 Route::view('/Contacto', 'contacto')->name('Contacto');
 

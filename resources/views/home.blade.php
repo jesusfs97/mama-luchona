@@ -3,9 +3,7 @@
 @section('Contenido')
 
 @if( $CDF[3]['colorDeFondo'] === "null")
-
-
-<header class="masthead text-white text-center" style="background-image:url({{Storage::url($CDF[3]['imagenDeFondo'])}});">
+<header class="masthead text-white text-center imagen img-fluid" style="background-image:url({{Storage::url($CDF[3]['imagenDeFondo'])}});">
 @else
 <header class="masthead text-white text-center" style="background-color:{{$CDF[3]['colorDeFondo']}};">
 @endif
@@ -34,7 +32,12 @@
 </header>
 
 <!-- Portfolio Section -->
+
+    @if( $CDF[4]['colorDeFondo'] === "null")
+<section class="page-section portfolio img-fluid imagen" style="background-image:url({{Storage::url( $CDF[4]['imagenDeFondo'])}})" id="Tienda">
+    @else
 <section class="page-section portfolio" style="background-color:{{ $CDF[4]['colorDeFondo']}}" id="Tienda">
+    @endif
     <div class="container">
         <!-- Portfolio Section Heading -->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{$menus[0]['Titulo']}}</h2>
@@ -86,40 +89,13 @@
               </div>  
 </section>
 
-<section class="page-section bg-primary text-white" id="About">
-    <div class="container pb-5">
-        
-        <!-- About Section Heading -->
-        <h2 class="page-section-heading text-center text-uppercase text-white">{{$menus[1]['Titulo']}}</h2>
-        
-        <!-- lineas que dividen -->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            
-            <div class="divider-custom-icon">
-                <i class="fas fa-star"></i>
-            </div>
-            
-            <div class="divider-custom-line"></div>
-        </div>
-        
-        <!-- contenido acerca de nosotros-->
-        <div class="row py-3">
-            <div class="col-lg-4 ml-auto">
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, facere. Rem perspiciatis maxime molestiae? Error perspiciatis ea illum quo unde voluptas, aliquam dicta ab perferendis dolor hic aspernatur sequi! Illum.</p>
-            </div>
-            <div class="col-lg-4 mr-auto">
-                <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic enim consectetur adipisci nostrum quisquam ut molestiae, facere debitis nemo voluptatibus! Atque vel eveniet dignissimos, autem illo itaque dolorum commodi doloremque!</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Confesionario-->
 <section class="page-section bg-danger" id="Confesionario">
     <div class="container pb-5">
         <!-- titulo Confesionario -->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{$menus[2]['Titulo']}}</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{$menus[1]['Titulo']}}</h2>
         
         <!-- Lineas que dividen -->
         <div class="divider-custom">
