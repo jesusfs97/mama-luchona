@@ -26,3 +26,7 @@ Route::get('/Administrar/Editar{id}','AdminController@editar')->name('titulos.ed
 Route::Put('/Administrar/Editar{id}','AdminController@update')->name('actualizar.Menu');
 Auth::routes();
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

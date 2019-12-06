@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('layouts.app')
 
 @section('Contenido')
 <div class="masthead text-center container">

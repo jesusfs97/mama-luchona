@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-const Vue = require('vue');
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -15,11 +15,13 @@ const Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('nav-bar', require('./components/Navbar.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('barra', require('./components/Navbar.vue').default);
+Vue.component('editar', require('./components/EditarNav.vue').default);
+Vue.component('Menus', require('./components/Administrar.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,5 +30,5 @@ Vue.component('nav-bar', require('./components/Navbar.vue').default);
  */
 
 const app = new Vue({
-    el: '#app'
-}).$mount('#app');
+    el: '#app',
+});
