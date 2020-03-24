@@ -2019,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
 
       data.append('_method', 'PUT'); //Enviamos la petición
 
-      axios.post('/subir/imagen', data).then(function (response) {
+      axios.post('/imagenPrincipal', data).then(function (response) {
         if (response.data === 'no llego') {
           me.msj = 'Porfavor selecciona una imagen';
           me.color = 'alert-danger';

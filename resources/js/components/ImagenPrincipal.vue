@@ -56,7 +56,7 @@
                 // Como lo hacíamos desde un formulario simple _(no ajax)_
                 data.append('_method', 'PUT');
                 //Enviamos la petición
-                axios.post('/subir/imagen',data)
+                axios.post('/imagenPrincipal',data)
                 .then(function (response) {
                     if (response.data === 'no llego'){
                         me.msj = 'Porfavor selecciona una imagen';
