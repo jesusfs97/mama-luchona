@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App;
+use App\Menu;
 
 class NavbarController extends Controller
 {
@@ -15,7 +15,7 @@ class NavbarController extends Controller
     public function index(Request $request)
     {
         if($request->ajax())
-        $menus = App\Menu::all();
+        $menus = Menu::all();
         return $menus;
     }
 
@@ -37,7 +37,8 @@ class NavbarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+ 
+
     }
 
     /**
@@ -69,9 +70,16 @@ class NavbarController extends Controller
      * @param  \App\Navbar  $navbar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Navbar $navbar)
+    public function update(Request $request, $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->Titulo = $request->Titulo;
+        $menu->colorFondo = $request->colorFondo;
+        $menu->colorTexto = $request->colorTexto;
+        // $menu->Tipografia = $request->Tipografia;
+        $menu->save();
+
+        return $menu;
     }
 
     /**

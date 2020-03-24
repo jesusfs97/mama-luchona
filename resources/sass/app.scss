@@ -6,3 +6,15 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.icono{
+    cursor: pointer;
+}
+.card{
+border-radius: 0px !important;
+}
+
+.img-sm{
+    height: 120px !important;
+    width: 120px;
+}

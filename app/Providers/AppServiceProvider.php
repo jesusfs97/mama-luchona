@@ -28,10 +28,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $valor = App\Menu::all();
-        view()->share('menus', $valor);
+        // $valor = App\Menu::all();
+        // view()->share('menus', $valor);
 
-        $fondo = App\Color::all();
-        view()->share('CDF', $fondo); # CDF (Color De Fondo)
+        // $Articulos = App\Articulo::All();
+        // view()->share('Articulos', $Articulos);
+
+        // $fondo = App\Color::all();
+        // view()->share('CDF', $fondo); # CDF (Color De Fondo)
     }
 }

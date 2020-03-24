@@ -76,14 +76,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $menuAcualizado = App\Menu::findOrFail($id);
-        $menuAcualizado->Titulo = $request->nombre;
-        $menuAcualizado->colorFondo = $request->colorFondo;
-        $menuAcualizado->colorTexto = $request->colorTexto;
+        $menu = Menu::findOrFail($id);
+        $menu->Titulo = $request->Titulo;
+        $menu->colorFondo = $request->colorFondo;
+        $menu->colorTexto = $request->colorTexto;
+        $menu->save();
 
-        $menuAcualizado->save();
-
-        return redirect()->route('Administrar');
+        return $menu;
 
     }
 
