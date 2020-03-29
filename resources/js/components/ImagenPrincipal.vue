@@ -9,13 +9,15 @@
                 <button @click="CargarImagen()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Subir Imagen</button>
             </div>
         </div>
+        <small class="form-text text-danger">{{ alerta }}</small>
 
         <div class="row">
-            <div v-for="(img,index) in imgs" v-bind:key="img" class="col-sm-3" style="width: 75px;">
-                <small class="form-text text-muted text-dark bold">Click en la imagen</small>
-                <img @click="copyTestingCode(index)" :src="img" class="rounded float-left mx-auto img-sm">
-                <input type="hidden" :id="'imagen'+index" :value="img">
+
+            <div v-if ="img" v-bind:key="img" class="col-sm-3" style="width: 75px;">
+                <input type="hidden" :value="img" name="imagen">
+                <small class="form-text text-success">{{ msj }}</small>
             </div>
+            <input v-else type="hidden" name="imagen" value='/img/principales/default.png' id="">
         </div>
     </div>
 </template>
@@ -26,8 +28,9 @@
             return {
                 cambio:'Imagen Principal',
                 imagen :null,
-                imgs:[],
+                img:'',
                 msj:'',
+                alerta:'',
                 color:'',
             }
         },
@@ -38,12 +41,13 @@
                 me.imagen = event.target.files[0];
                 me.cambio ='Se cargo la imagen ';
             },
-            Tiempo(){
+            Tiempo(param){
                 let me = this;
                 return setTimeout(function(){
+                    me.alerta='';
                     me.msj='';
                     me.color='';
-                    }, 2500);
+                    }, 2900);
             },
             CargarImagen(){
                 //Creamos el formData
@@ -58,39 +62,17 @@
                 //Enviamos la petición
                 axios.post('/imagenPrincipal',data)
                 .then(function (response) {
-                    if (response.data === 'no llego'){
-                        me.msj = 'Porfavor selecciona una imagen';
+                    if (response.data === false ){
+                        me.alerta = 'Porfavor selecciona una imagen';
                         me.color = 'alert-danger';
                         me.Tiempo();
                     }else{
-                        me.imgs.push(response.data)
+                        me.img = response.data;
+                        me.msj = 'Se guardo la imagen';
+                        me.Tiempo();
                     }
                 })
-            },
-            copyTestingCode (index) { 
-                let iden = '#imagen'+index;
-                let testingCodeToCopy = document.querySelector(iden);
-                testingCodeToCopy.setAttribute('type', 'text');
-                testingCodeToCopy.select();
-
-                    try {
-                      let successful = document.execCommand('copy');
-                      let msg = successful ? 'Se copio al portapapeles' : 'Fallo';
-                      let me = this;
-                      me.msj ='la URL '+msg;
-                      me.Tiempo();
-                    } catch (err) {
-                      alert('Oops, fallo al copiar');
-                    }
-
-                    /* unselect the range */
-                    testingCodeToCopy.setAttribute('type', 'hidden')
-                    window.getSelection().removeAllRanges()
-            },
-        updated() {
-           this.copyTestingCode();
-        }
-    
+            },  
         }
     }
 </script>

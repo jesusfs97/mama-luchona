@@ -1913,8 +1913,9 @@ __webpack_require__.r(__webpack_exports__);
         Tipografia: ""
       },
       activo: false
-    };
+    }; //termina el return
   },
+  //termina la data
   methods: {
     editar: function editar(m) {
       this.activo = true;
@@ -1931,25 +1932,30 @@ __webpack_require__.r(__webpack_exports__);
         colorFondo: menu.colorFondo,
         colorTexto: menu.colorTexto
       };
+      var me = this;
       axios.put("/Administrar/Menu/".concat(menu.id), params).then(function (res) {
         var index = _this.menus.findIndex(function (Buscar) {
           return Buscar.id === menu.id;
         });
 
-        console.log(res.data);
         _this.menus[index] = res.data;
         axios.get('/Administrar/Menu').then(function (res) {
           _this.menus = res.data;
+          _this.activo = false;
         });
+      });
+    },
+    cargar: function cargar() {
+      var _this2 = this;
+
+      axios.get('/Administrar/Menu').then(function (res) {
+        _this2.menus = res.data;
       });
     }
   },
+  // terminan los metodos
   mounted: function mounted() {
-    var _this2 = this;
-
-    axios.get('/Administrar/Menu').then(function (res) {
-      _this2.menus = res.data;
-    });
+    this.cargar();
   }
 });
 
@@ -1985,13 +1991,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cambio: 'Imagen Principal',
       imagen: null,
-      imgs: [],
+      img: '',
       msj: '',
+      alerta: '',
       color: ''
     };
   },
@@ -2002,12 +2011,13 @@ __webpack_require__.r(__webpack_exports__);
       me.imagen = event.target.files[0];
       me.cambio = 'Se cargo la imagen ';
     },
-    Tiempo: function Tiempo() {
+    Tiempo: function Tiempo(param) {
       var me = this;
       return setTimeout(function () {
+        me.alerta = '';
         me.msj = '';
         me.color = '';
-      }, 2500);
+      }, 2900);
     },
     CargarImagen: function CargarImagen() {
       //Creamos el formData
@@ -2020,38 +2030,16 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PUT'); //Enviamos la petición
 
       axios.post('/imagenPrincipal', data).then(function (response) {
-        if (response.data === 'no llego') {
-          me.msj = 'Porfavor selecciona una imagen';
+        if (response.data === false) {
+          me.alerta = 'Porfavor selecciona una imagen';
           me.color = 'alert-danger';
           me.Tiempo();
         } else {
-          me.imgs.push(response.data);
+          me.img = response.data;
+          me.msj = 'Se guardo la imagen';
+          me.Tiempo();
         }
       });
-    },
-    copyTestingCode: function copyTestingCode(index) {
-      var iden = '#imagen' + index;
-      var testingCodeToCopy = document.querySelector(iden);
-      testingCodeToCopy.setAttribute('type', 'text');
-      testingCodeToCopy.select();
-
-      try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'Se copio al portapapeles' : 'Fallo';
-        var me = this;
-        me.msj = 'la URL ' + msg;
-        me.Tiempo();
-      } catch (err) {
-        alert('Oops, fallo al copiar');
-      }
-      /* unselect the range */
-
-
-      testingCodeToCopy.setAttribute('type', 'hidden');
-      window.getSelection().removeAllRanges();
-    },
-    updated: function updated() {
-      this.copyTestingCode();
     }
   }
 });
@@ -2193,27 +2181,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      menus: []
+      menus: [],
+      titulo: ''
     };
   },
+  methods: {
+    get: function get() {
+      var me = this;
+      axios.get('/Administrar/Menu').then(function (res) {
+        me.menus = res.data;
+        me.titulo = me.menus.pop();
+      });
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/Administrar/Menu').then(function (res) {
-      _this.menus = res.data;
-    });
+    this.get();
   }
 });
 
@@ -37654,11 +37639,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "container" }, [
-          _c("span", { staticClass: "navbar-brand js-scroll-trigger" }, [
-            _vm._v("Mamá Luchona")
-          ]),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-edit" }),
+          _c("span", { staticClass: "navbar-brand js-scroll-trigger" }),
           _vm._v(" "),
           _c(
             "div",
@@ -37792,39 +37773,39 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.imgs, function(img, index) {
-        return _c(
-          "div",
-          { key: img, staticClass: "col-sm-3", staticStyle: { width: "75px" } },
-          [
-            _c(
-              "small",
-              { staticClass: "form-text text-muted text-dark bold" },
-              [_vm._v("Click en la imagen")]
-            ),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "rounded float-left mx-auto img-sm",
-              attrs: { src: img },
-              on: {
-                click: function($event) {
-                  return _vm.copyTestingCode(index)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", id: "imagen" + index },
-              domProps: { value: img }
-            })
-          ]
-        )
-      }),
-      0
-    )
+    _c("small", { staticClass: "form-text text-danger" }, [
+      _vm._v(_vm._s(_vm.alerta))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _vm.img
+        ? _c(
+            "div",
+            {
+              key: _vm.img,
+              staticClass: "col-sm-3",
+              staticStyle: { width: "75px" }
+            },
+            [
+              _c("input", {
+                attrs: { type: "hidden", name: "imagen" },
+                domProps: { value: _vm.img }
+              }),
+              _vm._v(" "),
+              _c("small", { staticClass: "form-text text-success" }, [
+                _vm._v(_vm._s(_vm.msj))
+              ])
+            ]
+          )
+        : _c("input", {
+            attrs: {
+              type: "hidden",
+              name: "imagen",
+              value: "/img/principales/default.png",
+              id: ""
+            }
+          })
+    ])
   ])
 }
 var staticRenderFns = []
@@ -37965,65 +37946,58 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "nav",
-      {
-        staticClass:
-          "navbar navbar-expand-lg text-uppercase fixed-top barra-transparente"
-      },
-      [
-        _c("div", { staticClass: "container" }, [
+  return _c(
+    "div",
+    { staticClass: "container", staticStyle: { display: "flex" } },
+    [
+      _c(
+        "a",
+        {
+          staticClass: "navbar-brand js-scroll-trigger",
+          style: {
+            backgroundColor: _vm.titulo.colorFondo,
+            color: _vm.titulo.colorTexto
+          },
+          attrs: { href: _vm.titulo.href }
+        },
+        [_vm._v(_vm._s(_vm.titulo.Titulo))]
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarResponsive" }
+        },
+        [
           _c(
-            "a",
-            {
-              staticClass: "navbar-brand js-scroll-trigger",
-              attrs: { href: "#page-top" }
-            },
-            [_vm._v("Mamá Luchona")]
-          ),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbarResponsive" }
-            },
-            [
-              _c(
-                "ul",
-                { staticClass: "navbar-nav ml-auto " },
-                _vm._l(_vm.menus, function(m, index) {
-                  return _c(
-                    "li",
-                    { key: index, staticClass: "nav-item mx-2" },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold",
-                          style: {
-                            backgroundColor: m.colorFondo,
-                            color: m.colorTexto
-                          },
-                          attrs: { href: m.href }
-                        },
-                        [_vm._v(_vm._s(m.Titulo) + " ")]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
+            "ul",
+            { staticClass: "navbar-nav ml-auto " },
+            _vm._l(_vm.menus, function(m, index) {
+              return _c("li", { key: index, staticClass: "nav-item mx-2" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "nav-link py-1 px-2 rounded js-scroll-trigger font-weight-bold",
+                    style: {
+                      backgroundColor: m.colorFondo,
+                      color: m.colorTexto
+                    },
+                    attrs: { href: m.href }
+                  },
+                  [_vm._v(_vm._s(m.Titulo) + " ")]
+                )
+              ])
+            }),
+            0
           )
-        ])
-      ]
-    )
-  ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -38044,10 +38018,7 @@ var staticRenderFns = [
           "aria-label": "Toggle navigation"
         }
       },
-      [
-        _vm._v("\n                Menu\n                "),
-        _c("i", { staticClass: "fas fa-bars" })
-      ]
+      [_c("i", { staticClass: "fas fa-bars" })]
     )
   }
 ]

@@ -1,5 +1,5 @@
     <!-- Footer -->
-    {{-- <footer class="footer text-center" style="background-color:{{$CDF[1]['colorDeFondo']}}"> --}}
+    <footer class="footer text-center bg-dark" >
         <div class="container">
             <div class="row">
                 
@@ -13,7 +13,7 @@
     
             <!-- Footer Social Icons -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Sigueme en:</h4>
+                <p class="text-uppercase mb-4">{{ config('app.name') }} | Copyright @ {{ date('Y')}}</p>
 
                     <a class="btn btn-outline-success btn-social mx-1" href="#">
                         <i class="fab fa-fw fa-facebook-f"></i>
@@ -45,9 +45,7 @@
     
       <!-- Copyright Section -->
     {{-- <section class="copyright py-4 text-center text-white" style="background-color:{{$CDF[2]['colorDeFondo']}}"> --}}
-        <div class="container">
-            <small class="text-uppercase mb-4">{{ config('app.name') }} | Copyright @ {{ date('Y')}}</small>
-        </div>
+
     </section>
     
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->

@@ -7,6 +7,7 @@ use App\Menu;
 
 class NavbarController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -77,7 +78,7 @@ class NavbarController extends Controller
         $menu->colorFondo = $request->colorFondo;
         $menu->colorTexto = $request->colorTexto;
         // $menu->Tipografia = $request->Tipografia;
-        $menu->save();
+        $menu->update();
 
         return $menu;
     }

@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use App\Articulo; 
 
 class ArticulosController extends Controller
-{
+{   
+    function __construct()
+    {
+        $this->middleware('auth',['except' =>['index']]);
+        $this->middleware('rol',['except' =>['index','show']]);
+    }
     public function index()
     {
         $Articulos = Articulo::All();
@@ -26,12 +31,12 @@ class ArticulosController extends Controller
     }
     public function guardar(Request $request)
     {   
+        // return $request;   
         Articulo::create([
            'Meta_Descripcion' => request('metadescription'),
            'Meta_Keywords' => request('metakeywords'),
            'Titulo' => request('titulo'),
-           'ImagenPrincipal' => request('imagen'),
-           'Descripcion' => request('descripcion'),
+           'UrlImagen' => request('imagen'),
            'Contenido1' => request('editor1'),
         ]);
 
@@ -54,10 +59,11 @@ class ArticulosController extends Controller
         if($request->hasFile('imagen')){
             $imagen = $request->file('imagen');
             $nombre = $imagen->getClientOriginalName();
-            $url = '/img/principales';
+            $url = '/img/principales/';
             $path = public_path($url);
             $imagen->move($path , $nombre);
             return $url.$nombre;
         }
+        return 'false' ;
     }
 }

@@ -7,10 +7,11 @@ use App;
 
 class AdminController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('rol');
+    }
     /**
      * Display a listing of the resource.
      *

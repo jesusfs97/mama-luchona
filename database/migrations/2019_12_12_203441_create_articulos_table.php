@@ -15,11 +15,10 @@ class CreateArticulosTable extends Migration
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('Meta_Descripcion');
+            $table->text('Meta_Descripcion');
             $table->char('Meta_Keywords');
-            $table->char('UrlImagen');
             $table->char('Titulo', 50);
-            $table->char('Descripcion');
+            $table->char('UrlImagen');
             $table->text('Contenido1');
             $table->timestamps();
         });

@@ -4,15 +4,16 @@
 @section('Contenido')
 <div class=" container align-content-center">
     <div class="row masthead">
-        <h1 class="display-4"> Menus</h1>
+        <h4 class="display-6"> Editar barra de navegacion </h4>
+        <div class="container col-12">
+            <Menus></Menus>
+        </div>
     </div>
 </div>
-<div class="container col-12">
-    <Menus> </Menus>
-</div>
 
 
-<div class=" container">
+
+{{-- <div class=" container">
         <div class="row masthead text-center">
             <h1 class="display-4">Colores de fondo</h1>
             @if(session('mensaje'))
@@ -34,7 +35,7 @@
                 </thead>
     
                 <tbody>
-                    {{-- {{dd($fondo[0]['colorDeFondo'])}} --}}
+
                     @foreach ($fondo as $Color)   
                     <tr>
                         <th scope="row">{{$Color->id}}</th>
@@ -50,5 +51,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> --}}
 @endsection

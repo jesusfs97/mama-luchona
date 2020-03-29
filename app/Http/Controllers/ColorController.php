@@ -7,7 +7,11 @@ use App;
 
 class ColorController extends Controller
 {
-    
+    function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('rol',['except' =>['index']]);
+    }
 
     public function editar($id)
     {

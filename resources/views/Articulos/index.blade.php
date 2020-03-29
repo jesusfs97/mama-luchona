@@ -6,17 +6,17 @@
     <meta name="description" content="{{$Articulo->Meta_Descripcion}}" />
     <meta name="keywords" content="{{$Articulo->Meta_Keywords}}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Mamas luchonas') }}</title>
+    <title>{{$Articulo->Titulo}}</title>
     <script src="https://kit.fontawesome.com/76f8203e92.js"></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/css/freelancer.css') }}">
-    
 </head>
 
 <body>
-    <div class="container app" id="app">
+    @include('Partials.Nav-Bar')
+    <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <!-- Titulo -->
@@ -52,26 +52,48 @@
                     </div>
                 </div>
                 <!-- Comments Form -->
-                <div class="card my-4">
-                    <h5 class="card-header">Leave a Comment:</h5>
+                @if(auth()->check())
+
+                <div class="card my-4" >
+                    <h5 class="card-header">¿Qué te parecio esto {{auth()->user()->name}}?</h5>
                     <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3"></textarea>
+                        <form method="POST" action="{{ route('CrearComentario', $Articulo->id)}}">
+                            <div class="form-group" >
+                                <textarea name="comentario" class="form-control" rows="3"></textarea>
+                                <input name="usuario" type="hidden" value="{{auth()->user()->name}}">
+                                <input name="articulo" type="hidden" value="{{$Articulo->id}}">
+                                @csrf
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
+                @else
+                    <div class="card my-4">
+                        <h5 class="card-header">Porfavor inicia sesion</h5>
+                    </div>
+                @endif
                     <!-- Single Comment -->
-                    <div class="media mb-4">
+
+                @forelse ($Articulo->comentarios as $comentario)
+                    <div class="media mb-4" id="comentarios">
                         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                         <div class="media-body">
-                            <h5 class="mt-0">Commenter Name</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            <h5 class="mt-0">{{$comentario->username}}</h5>
+                            {{ $comentario->contenido }}
                         </div>
                     </div>
-                    <!-- Comment with nested comments -->
+                        
+                @empty
+                    <div class="media mb-4" id="comentarios">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <h5 class="mt-0">Se la primera en comentar</h5>
+                        </div>
+                    </div>
+                        
+                @endforelse
+                    {{-- <!-- Comment with nested comments -->
                     <div class="media mb-4">
                         <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                         <div class="media-body">
@@ -92,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- Sidebar Widgets Column -->
                 <div class="col-md-4">
@@ -143,7 +165,7 @@
         </div>
         <!-- /.container -->
         <!-- Footer -->
-        <barra />
+        <barra></barra>
         @include('Partials.Footer')
     </div>
     <!-- /.container -->

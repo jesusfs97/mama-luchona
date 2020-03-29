@@ -44,8 +44,8 @@
         <nav class="navbar navbar-expand-lg text-uppercase barra-transparente">
             <div class="container">
                 
-                <span class="navbar-brand js-scroll-trigger">Mamá Luchona</span>
-                <i class="fas fa-edit"></i>
+                <span class="navbar-brand js-scroll-trigger"></span>
+                
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto ">
 
@@ -73,9 +73,9 @@ export default {
                 Tipografia:"",
             },
             activo:false,
-        }
+        }//termina el return
 
-    },
+    }, //termina la data
     methods:{
         editar(m){
             this.activo = true;
@@ -91,23 +91,25 @@ export default {
                 colorFondo: menu.colorFondo,
                 colorTexto: menu.colorTexto,
             };
-
+            let me = this;
             axios.put(`/Administrar/Menu/${menu.id}`, params).then(res=>{
             const index = this.menus.findIndex(Buscar => Buscar.id === menu.id);
-            console.log(res.data);
             this.menus[index] = res.data;
-            
                 axios.get('/Administrar/Menu').then(res =>{
                     this.menus = res.data;
+                    this.activo = false;
                 });
             });
-        }
-    },
-    
-    mounted(){
-        axios.get('/Administrar/Menu').then(res =>{
+        },
+        cargar(){
+                    axios.get('/Administrar/Menu').then(res =>{
            this.menus = res.data;
         });
+        }
+    }, // terminan los metodos
+    
+    mounted(){
+        this.cargar();
     },
     
 }

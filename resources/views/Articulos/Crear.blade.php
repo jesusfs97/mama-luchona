@@ -24,10 +24,6 @@
                             <label for="titulo">Titulo :</label>
                             <input name="titulo" class="form-control" id="titulo" type="text" required placeholder="Agrega un titulo">
                         </div>
-                        <div class="form-group">
-                            <label for="descripcion">descripcion :</label>
-                            <input name="descripcion" class="form-control" id="descripcion" type="text" required placeholder="Agrega una descripcion">
-                        </div>
 
                         <textarea class="ckeditor" name="editor1" id="editor1" rows="10" cols="80">
                             
