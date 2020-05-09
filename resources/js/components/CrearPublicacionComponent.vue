@@ -2,7 +2,7 @@
     <div class="container align-content-center" >
         <div class="row input-group">
             <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 rounded bg-rosa area">
-                <div class="input-group my-3">
+                <div v-if='auth' class="input-group my-3">
                      <input type="text"
                         class="form-control"
                         placeholder="¿Que tienes en mente mamá?..."
@@ -13,8 +13,14 @@
                         <button @click.prevent="enviarPensamiento()" class="btn btn-outline-info" type="button" id="button-addon2">Enviar</button>
                     </div>
                 </div>
-                <div class="text-center rounded">
+                <div v-if='auth' class="text-center container rounded">
                      <p class="t-A p-3">{{pensamiento}}</p>
+                </div>
+                <div v-else class="alert alert-warning m-4  " role="alert">
+                    <p>Porfavor registrate para decirnos lo que piensas</p>
+                </div>
+                <div v-if="mensaje" class="alert alert-success m-4  " role="alert">
+                    <p>{{mensaje}}</p>
                 </div>
             </div>
 
@@ -39,12 +45,14 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
         </div>
     </div> 
 </template>
 <script>
 export default {
+    props:[
+        'auth'
+    ],
     data(){
         return {
             pensamientos :[],
@@ -118,7 +126,11 @@ export default {
                 'pensamiento' : me.pensamiento,
             }
             axios.post(url,datos).then(res =>{
-                me.mensaje = res.data;
+                me.pensamiento = '';
+                me.mensaje = res.data.mensaje;
+                setTimeout((m) => {
+                    me.mensaje = '';
+                }, 4000);
             }).catch(error =>{
                 console.log(error)
             });

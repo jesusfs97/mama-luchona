@@ -3,6 +3,7 @@ Route::get('/frase', 'FraseController@index'); // VueJS
 Route::post('/frase-nueva', 'FraseController@store');
 Route::get('/publicaciones', 'PublicacionController@index');
 Route::put('/publicaciones-aceptar','PublicacionController@update');
+Route::delete('/publicaciones-borrar{id}','PublicacionController@destroy');
 Route::post('/pensamiento-guardar', 'PublicacionController@store');
 Route::get('/pensamientos-aceptados','PublicacionController@show');
 

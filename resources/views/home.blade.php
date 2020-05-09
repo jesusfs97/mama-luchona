@@ -72,8 +72,11 @@
 
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Portfolio Grid Items -->
-        <crear-publicacion-component></crear-publicacion-component>
+
+        <crear-publicacion-component :auth="{{json_encode($usuario)}}"></crear-publicacion-component>
+
+
+
     </section>
 </div>
 

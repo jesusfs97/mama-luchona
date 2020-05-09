@@ -24,7 +24,7 @@
 
                         <td>
                             <a class="btn btn-outline-primary btn-sm" @click.prevent="aceptar(publicacion)" href=""><span>Acceptar</span></a>
-                            <a class="btn btn-outline-danger btn-sm" href=""><span>Eliminar</span></a>
+                            <a class="btn btn-outline-danger btn-sm" @click.prevent="borrar(publicacion)" href=""><span>Eliminar</span></a>
 
                         </td>
     
@@ -45,7 +45,6 @@
                     </li>
                 </ul>
             </nav>
-        
     </div>
 </template>
 <script>
@@ -98,6 +97,22 @@ export default {
 
     },
     methods:{
+        borrar(data){//Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+                let me =this;
+                let id= data.id
+                let url = '/publicaciones-borrar'+id;
+                if (confirm('¿Seguro que deseas borrar esta tarea?')) {
+                    axios.delete(url
+                    ).then(function (response) {
+                        me.TraerPublicacion(me.paginas.pagina_actual)
+                        me.mensaje = response.data.mensaje
+                        me.cerrarMensaje();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }); 
+                }
+            },
 
         TraerPublicacion(pagina){
             let me = this;

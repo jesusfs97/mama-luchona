@@ -119,8 +119,13 @@ class PublicacionController extends Controller
      * @param  \App\Publicacion  $publicacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publicacion $publicacion)
-    {
-        //
+    public function destroy($id)
+    {   
+        $publicacion = Publicacion::findOrFail($id);
+        $publicacion->delete();
+        $data=[
+            'mensaje'=> 'Se elimino la publicacion correctamente'
+        ];
+        return response()->json($data, 200);
     }
 }

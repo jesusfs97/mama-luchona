@@ -17,7 +17,12 @@ class ArticulosController extends Controller
     public function index()
     {
         $Articulos = Articulo::All();
-        return view('home', compact('Articulos'));
+        if(Auth()->check()){
+            $usuario = true;
+        }else{
+            $usuario = false;
+        }
+        return view('home', compact('Articulos' , 'usuario'));
     }
 
     public function show($id)

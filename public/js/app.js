@@ -1887,7 +1887,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1943,6 +1942,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    borrar: function borrar(data) {
+      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+      var me = this;
+      var id = data.id;
+      var url = '/publicaciones-borrar' + id;
+
+      if (confirm('¿Seguro que deseas borrar esta tarea?')) {
+        axios["delete"](url).then(function (response) {
+          me.TraerPublicacion(me.paginas.pagina_actual);
+          me.mensaje = response.data.mensaje;
+          me.cerrarMensaje();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
     TraerPublicacion: function TraerPublicacion(pagina) {
       var me = this;
       var url = '/publicaciones?page=' + pagina;
@@ -2241,7 +2256,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth'],
   data: function data() {
     return {
       pensamientos: [],
@@ -2320,7 +2341,11 @@ __webpack_require__.r(__webpack_exports__);
         'pensamiento': me.pensamiento
       };
       axios.post(url, datos).then(function (res) {
-        me.mensaje = res.data;
+        me.pensamiento = '';
+        me.mensaje = res.data.mensaje;
+        setTimeout(function (m) {
+          me.mensaje = '';
+        }, 4000);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -37986,7 +38011,20 @@ var render = function() {
                 [_c("span", [_vm._v("Acceptar")])]
               ),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-outline-danger btn-sm",
+                  attrs: { href: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.borrar(publicacion)
+                    }
+                  }
+                },
+                [_c("span", [_vm._v("Eliminar")])]
+              )
             ])
           ])
         }),
@@ -38083,16 +38121,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col-3" } }, [_vm._v("Acción")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-outline-danger btn-sm", attrs: { href: "" } },
-      [_c("span", [_vm._v("Eliminar")])]
-    )
   }
 ]
 render._withStripped = true
@@ -38445,56 +38473,82 @@ var render = function() {
             "col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 rounded bg-rosa area"
         },
         [
-          _c("div", { staticClass: "input-group my-3" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pensamiento,
-                  expression: "pensamiento"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                placeholder: "¿Que tienes en mente mamá?...",
-                "aria-label": "¿Que tienes en mente mamá?..."
-              },
-              domProps: { value: _vm.pensamiento },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.pensamiento = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-info",
-                  attrs: { type: "button", id: "button-addon2" },
+          _vm.auth
+            ? _c("div", { staticClass: "input-group my-3" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pensamiento,
+                      expression: "pensamiento"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "¿Que tienes en mente mamá?...",
+                    "aria-label": "¿Que tienes en mente mamá?..."
+                  },
+                  domProps: { value: _vm.pensamiento },
                   on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.enviarPensamiento()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pensamiento = $event.target.value
                     }
                   }
-                },
-                [_vm._v("Enviar")]
-              )
-            ])
-          ]),
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-info",
+                      attrs: { type: "button", id: "button-addon2" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.enviarPensamiento()
+                        }
+                      }
+                    },
+                    [_vm._v("Enviar")]
+                  )
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "text-center rounded" }, [
-            _c("p", { staticClass: "t-A p-3" }, [
-              _vm._v(_vm._s(_vm.pensamiento))
-            ])
-          ])
+          _vm.auth
+            ? _c("div", { staticClass: "text-center container rounded" }, [
+                _c("p", { staticClass: "t-A p-3" }, [
+                  _vm._v(_vm._s(_vm.pensamiento))
+                ])
+              ])
+            : _c(
+                "div",
+                {
+                  staticClass: "alert alert-warning m-4  ",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("p", [
+                    _vm._v("Porfavor registrate para decirnos lo que piensas")
+                  ])
+                ]
+              ),
+          _vm._v(" "),
+          _vm.mensaje
+            ? _c(
+                "div",
+                {
+                  staticClass: "alert alert-success m-4  ",
+                  attrs: { role: "alert" }
+                },
+                [_c("p", [_vm._v(_vm._s(_vm.mensaje))])]
+              )
+            : _vm._e()
         ]
       ),
       _vm._v(" "),
@@ -51437,15 +51491,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************************!*\
   !*** ./resources/js/components/CrearPublicacionComponent.vue ***!
   \***************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CrearPublicacionComponent_vue_vue_type_template_id_85f9a528___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CrearPublicacionComponent.vue?vue&type=template&id=85f9a528& */ "./resources/js/components/CrearPublicacionComponent.vue?vue&type=template&id=85f9a528&");
 /* harmony import */ var _CrearPublicacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CrearPublicacionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CrearPublicacionComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CrearPublicacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CrearPublicacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -51475,7 +51528,7 @@ component.options.__file = "resources/js/components/CrearPublicacionComponent.vu
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/CrearPublicacionComponent.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
