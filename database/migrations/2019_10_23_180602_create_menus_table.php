@@ -19,7 +19,6 @@ class CreateMenusTable extends Migration
             $table->char('href',250);
             $table->char('colorFondo', 15);
             $table->char('colorTexto', 15);
-            $table->char('Tipografia');
             $table->timestamps();
         });
     }
