@@ -1,4 +1,10 @@
 <?php
+Route::get('/frase', 'FraseController@index'); // VueJS
+Route::post('/frase-nueva', 'FraseController@store');
+Route::get('/publicaciones', 'PublicacionController@index');
+Route::put('/publicaciones-aceptar','PublicacionController@update');
+Route::post('/pensamiento-guardar', 'PublicacionController@store');
+Route::get('/pensamientos-aceptados','PublicacionController@show');
 
 Route::get('/', 'ArticulosController@index')->name('inicio');
 Route::get('/Crear_Articulo', 'ArticulosController@crear')->name('articulos.crear');

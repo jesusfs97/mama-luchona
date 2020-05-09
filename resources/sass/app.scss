@@ -6,6 +6,37 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@font-face{
+    font-family: BalsamiqSans-Italic;
+    src: url('/fonts/BalsamiqSans-Italic.tff');
+}
+.masthead{
+    padding-bottom: calc(7rem + 105px) !important;
+}
+#app{
+    background-color: #fef0ff;
+}
+.bg-rosa{
+    
+    background-color: #f151ff94;
+}
+
+.text-rosa{
+    color: pink;
+}
+.t-A{
+    font-family: cursive;
+    box-shadow: inset 0px -2px 8px 0px #ff6fce;
+    background-color: #ffe4fd;
+    border-radius: 5px;
+}
+.area{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 320px;
+    max-height: 320px;
+}
+
 
 .icono{
     cursor: pointer;

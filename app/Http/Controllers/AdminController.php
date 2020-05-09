@@ -21,7 +21,7 @@ class AdminController extends Controller
     {   
 
         $menus = App\Menu::all();
-        $fondo = App\Color::all();
+        $fondo = App\color::all();
         return view('Administrar', compact('menus', 'fondo'));
 
 

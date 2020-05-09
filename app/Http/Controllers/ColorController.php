@@ -15,7 +15,7 @@ class ColorController extends Controller
 
     public function editar($id)
     {
-        $Color = App\Color::findOrFail($id);
+        $Color = App\color::findOrFail($id);
         return view('editarColor', compact('Color'));
     }
 

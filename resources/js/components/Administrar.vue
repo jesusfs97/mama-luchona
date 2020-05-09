@@ -1,5 +1,5 @@
 <template>
-    <div class="container align-items-center" >
+    <div class="col-9 mx-0 px-0 align-items-center" >
         <form v-if="activo" @submit.prevent="guardar(menu)">
             <div class="form-row  ">   
                 <div class="col-sm-3">
@@ -46,7 +46,7 @@
                 
                 <span class="navbar-brand js-scroll-trigger"></span>
                 
-                <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="navbar" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto ">
 
                         <li class="nav-item mx-2" v-for="(m, index) in menus" :key="index">
@@ -102,8 +102,8 @@ export default {
             });
         },
         cargar(){
-                    axios.get('/Administrar/Menu').then(res =>{
-           this.menus = res.data;
+            axios.get('/Administrar/Menu').then(res =>{
+            this.menus = res.data;
         });
         }
     }, // terminan los metodos

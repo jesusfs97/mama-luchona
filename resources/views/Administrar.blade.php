@@ -3,13 +3,20 @@
 
 @section('Contenido')
 <div class=" container align-content-center">
-    <div class="row masthead">
-        <h4 class="display-6"> Editar barra de navegacion </h4>
-        <div class="container col-12">
+    <div class="masthead pb-3">
+        <admin-frase-component></admin-frase-component>
+        <div class="container row">
+            <h5 class="display-6 col-3 px-0 mx-0"> Editar barra de navegacion </h5>
             <Menus></Menus>
         </div>
     </div>
 </div>
+<div class="py-5 container align-content-center">
+    <div class="row text-center">
+        <admin-comentarios-component></admin-comentarios-component>
+    </div>
+</div>
+    
 
 
 
