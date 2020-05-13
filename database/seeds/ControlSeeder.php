@@ -68,7 +68,8 @@ class ControlSeeder extends Seeder
         $user->name = 'Gisela';
         $user->email = 'giselacmb@gmail.com';
         $user->password = bcrypt('08Dici@mbr@1983');
-        $user->rol = 'Admin';
+        $admin = 'Admin';
+        $user->rol = $admin;
         $user->save();
 
     }
