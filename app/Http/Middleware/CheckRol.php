@@ -15,7 +15,7 @@ class CheckRol
      */
     public function handle($request, Closure $next)
     {   
-        if(auth()->user()->rol === 'Admin')
+        if(auth()->user()->rol == 'Admin')
         {
             return $next($request);
         }
