@@ -34,8 +34,13 @@
                 
                 <hr>
                 <!-- Post Content -->
-                <p class="lead"></p>
-                {!! $Articulo->Contenido1 !!}
+                <div class="row">
+                    <p class="lead">
+                        {!! $Articulo->Contenido1 !!}
+    
+                    </p>
+
+                </div>
                 
                 <div class="container">
                     <div class="media-container-row">

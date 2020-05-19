@@ -30,11 +30,11 @@
             </div>
 
             <!-- Portfolio Grid Items -->
-            <div class="row col-sm-12" >
+            <div class="row container align-content-center" >
                 <div class="card-group">
 
                     @forelse ($Articulos as $Articulo)
-                        <div class="card card-md mx-2">
+                        <div class="card col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 card-md mx-2">
                             <img class="card-img-top img-sm" src="{{$Articulo->UrlImagen}}" alt="Card image cap">
 
                         <div class="card-body">
@@ -45,6 +45,15 @@
                         <div class="card-footer">
                             <a href="{{ route('articulos.ver',$Articulo) }}" class="card-link">Leer mas</a>
                         </div>
+                        @if (auth()->check())
+                            
+                            @if(auth()->user()->rol === 'Admin')
+                            <div class="card-footer">
+                                <a href="{{ route('articulo.editar',$Articulo) }}" class="card-link">Editar</a>
+                                {{-- Route::post('/Articulos/Editar/{id}','ArticulosController@show')->name('articulo.editar'); --}}
+                            </div>
+                            @endif
+                        @endif
 
                         <div class="card-footer">
                             <small class="text-muted">Publicado: {{$Articulo->created_at->diffForHumans()}} </small>

@@ -18,6 +18,7 @@ class CreateArticulosTable extends Migration
             $table->text('Meta_Descripcion');
             $table->char('Meta_Keywords');
             $table->char('Titulo', 50);
+            $table->string('URL')->unique();
             $table->char('UrlImagen');
             $table->text('Contenido1');
             $table->timestamps();

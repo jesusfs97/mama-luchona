@@ -62,7 +62,7 @@
                 //Enviamos la petición
                 axios.post('/imagenPrincipal',data)
                 .then(function (response) {
-                    if (response.data === false ){
+                    if (response.data === 'no llego' ){
                         me.alerta = 'Porfavor selecciona una imagen';
                         me.color = 'alert-danger';
                         me.Tiempo();
