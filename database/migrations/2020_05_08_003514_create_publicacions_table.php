@@ -17,7 +17,7 @@ class CreatePublicacionsTable extends Migration
             $table->bigIncrements('id');
             $table->char('usuario');
             $table->text('publicacion');
-            $table->char('estado');
+            $table->char('estado')->nullable();
             $table->timestamps();
         });
     }
