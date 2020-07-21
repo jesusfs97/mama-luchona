@@ -19,7 +19,7 @@
         
     </div>
 
-    <script src="{{ asset('js/app.js'.'?'.Str::Random(3)) }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('vendors/ckeditor/ckeditor.js'.'?'.Str::Random(3)) }}"></script>
 </body>
 </html>
